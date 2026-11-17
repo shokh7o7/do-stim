@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Do'stim — Uy hayvonlarini asrab olish</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/8183/8183261.png">
+  <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/4.0.0/model-viewer.min.js"></script>
+</head>
+<body>
+
+  <div class="preloader" id="preloader">
+    <div class="preloader-content">
+      <div class="preloader-logo">
+        <svg viewBox="0 0 24 24"><circle cx="6" cy="9" r="2" /><circle cx="10" cy="5" r="2" /><circle cx="14" cy="5" r="2" /><circle cx="18" cy="9" r="2" /><path d="M12 11c-3 0-6 3.5-6 6.5 0 1.7 1.3 2.5 3 2.5 1.3 0 2-.6 3-.6s1.7.6 3 .6c1.7 0 3-.8 3-2.5 0-3-3-6.5-6-6.5Z" /></svg>
+      </div>
+      <h1 class="preloader-title">Do'stim</h1>
+      <p class="preloader-sub">Mehr bilan uy izlayapmiz</p>
+      <div class="preloader-bar">
+        <div class="preloader-bar-fill" id="preloaderBar"></div>
+      </div>
+      <p class="preloader-percent" id="preloaderPercent">0%</p>
+    </div>
+  </div>
+
+  <header class="header">
+    <div class="container header-inner">
+      <a href="#home" class="logo">
+        <span class="logo-icon">
+          <svg viewBox="0 0 24 24"><circle cx="6" cy="9" r="2" /><circle cx="10" cy="5" r="2" /><circle cx="14" cy="5" r="2" /><circle cx="18" cy="9" r="2" /><path d="M12 11c-3 0-6 3.5-6 6.5 0 1.7 1.3 2.5 3 2.5 1.3 0 2-.6 3-.6s1.7.6 3 .6c1.7 0 3-.8 3-2.5 0-3-3-6.5-6-6.5Z" /></svg>
+        </span>
+        Do'stim
+      </a>
+
+      <button class="menu-btn" id="menuBtn" type="button">Menyu</button>
+
+      <nav class="nav" id="nav">
+        <a href="#home">Bosh sahifa</a>
+        <a href="#pets">Hayvonlar</a>
+        <a href="#news">Yangiliklar</a>
+        <a href="#about">Biz haqimizda</a>
+        <a href="#contact">Aloqa</a>
+      </nav>
+    </div>
+  </header>
+
+  <section class="hero" id="home">
+    <div class="container hero-grid">
+      <div class="hero-text">
+        <span class="hero-badge">Mehr bilan uy izlayapmiz</span>
+        <h1>Yangi do'stingiz sizni <span>kutmoqda</span></h1>
+        <p>Boshpanamizdagi mushuk, it va quyonlar bilan tanishing. Har birini 3D ko'rinishda aylantirib ko'ring va o'zingizga yoqqanini asrab oling.</p>
+        <div class="hero-actions">
+          <a href="#pets" class="btn btn-primary">Hayvonlarni ko'rish</a>
+          <a href="#steps" class="btn btn-light">Qanday asrab olinadi?</a>
+        </div>
+      </div>
+
+      <div class="model-box hero-model">
+        <model-viewer
+          class="viewer-hero"
+          src="models/dog.glb"
+          alt="3D it modeli"
+          auto-rotate
+          camera-controls
+          shadow-intensity="1"
+          interaction-prompt="none">
+          <div class="loading" slot="poster">Yuklanmoqda...</div>
+        </model-viewer>
+        <div class="model-error">Model topilmadi</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="stats">
+    <div class="container stats-grid">
+      <div class="stat">
+        <b>1 200+</b>
+        <span>Hayvon yangi uy topdi</span>
+      </div>
+      <div class="stat">
+        <b>85</b>
+        <span>Ko'ngilli yordamchi</span>
+      </div>
+      <div class="stat">
+        <b>7 yil</b>
+        <span>Faoliyat tajribasi</span>
+      </div>
+      <div class="stat">
+        <b>100%</b>
+        <span>Emlangan hayvonlar</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="pets">
+    <div class="container">
+      <div class="section-title">
+        <span class="eyebrow">Asrab olish uchun</span>
+        <h2>Bizning hayvonlar</h2>
+        <p>Tur, yosh yoki ism bo'yicha qidirib, o'zingizga mos do'stni toping.</p>
+      </div>
+
+      <div class="filters">
+        <div class="type-filters">
+          <button class="type-btn active" data-type="Hammasi">Hammasi</button>
+          <button class="type-btn" data-type="Mushuk">Mushuk</button>
+          <button class="type-btn" data-type="It">It</button>
+          <button class="type-btn" data-type="Quyon">Quyon</button>
+        </div>
+
+        <div class="filter-fields">
+          <select id="ageFilter">
+            <option value="all">Barcha yoshlar</option>
+            <option value="small">1 yoshgacha</option>
+            <option value="middle">2 – 4 yosh</option>
+            <option value="big">5 yoshdan katta</option>
+          </select>
+          <input type="text" id="searchInput" placeholder="Ism bo'yicha qidirish...">
+        </div>
+      </div>
+
+      <div class="pet-grid" id="petGrid"></div>
+      <p class="empty" id="emptyText" hidden>Hech narsa topilmadi. Boshqa filtr bilan urinib ko'ring.</p>
+    </div>
+  </section>
+
+  <section class="section steps" id="steps">
+    <div class="container">
+      <div class="section-title">
+        <span class="eyebrow">4 oddiy qadam</span>
+        <h2>Qanday asrab olinadi?</h2>
+        <p>Asrab olish bepul va oson. Biz har bir qadamda yoningizdamiz.</p>
+      </div>
+
+      <div class="steps-grid">
+        <div class="step">
+          <span class="step-num">1</span>
+          <h3>Tanlang</h3>
+          <p>Saytdagi hayvonlarni ko'rib chiqing va o'zingizga yoqqanini tanlang.</p>
+        </div>
+        <div class="step">
+          <span class="step-num">2</span>
+          <h3>Ariza qoldiring</h3>
+          <p>"Asrab olish" tugmasini bosib, qisqa formani to'ldiring.</p>
+        </div>
+        <div class="step">
+          <span class="step-num">3</span>
+          <h3>Tanishing</h3>
+          <p>Boshpanaga kelib, hayvon bilan yaqindan tanishasiz.</p>
+        </div>
+        <div class="step">
+          <span class="step-num">4</span>
+          <h3>Uyga olib keting</h3>
+          <p>Hujjatlar tayyor bo'lgach, yangi do'stingiz siz bilan uyga ketadi.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section news" id="news">
+    <div class="container">
+      <div class="section-title">
+        <span class="eyebrow">Yangiliklar</span>
+        <h2>Boshpanadagi yangiliklar</h2>
+        <p>Tadbirlar, yangi kelgan hayvonlar va foydali e'lonlar.</p>
+      </div>
+
+      <div class="news-grid">
+        <article class="news-card">
+          <div class="news-top news-peach">
+            <svg viewBox="0 0 24 24"><path d="M12 21s-7-4.5-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 11c0 5.5-7 10-7 10Z" /></svg>
+          </div>
+          <div class="news-body">
+            <span class="news-date">12-noyabr, 2026</span>
+            <h3>Boshpanaga 5 ta yangi quyon keldi</h3>
+            <p>Bu hafta bizga kichkina quyonchalar olib kelindi. Ular emlandi va tez orada yangi uy kutadi.</p>
+          </div>
+        </article>
+
+        <article class="news-card">
+          <div class="news-top news-sky">
+            <svg viewBox="0 0 24 24"><path d="M9 3h6v4h4v6h-4v8H9v-8H5V7h4z" /></svg>
+          </div>
+          <div class="news-body">
+            <span class="news-date">5-noyabr, 2026</span>
+            <h3>Shanba kuni bepul emlash</h3>
+            <p>Har oyning birinchi shanbasida uy hayvonlaringizni bepul emlatishingiz mumkin.</p>
+          </div>
+        </article>
+
+        <article class="news-card">
+          <div class="news-top news-green">
+            <svg viewBox="0 0 24 24"><circle cx="9" cy="8" r="3" /><circle cx="17" cy="9" r="2.5" /><path d="M3 20c0-3.5 2.7-6 6-6s6 2.5 6 6M15 20c0-2.5 1-4.5 3-4.5s3 2 3 4.5" /></svg>
+          </div>
+          <div class="news-body">
+            <span class="news-date">28-oktabr, 2026</span>
+            <h3>Ko'ngillilar uchrashuvi</h3>
+            <p>Yakshanba kuni yangi ko'ngillilar bilan tanishuv bo'ladi. Hammani taklif qilamiz!</p>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section tips">
+    <div class="container">
+      <div class="section-title">
+        <span class="eyebrow">Foydali maslahatlar</span>
+        <h2>Uy hayvoniga qanday qarash kerak?</h2>
+      </div>
+
+      <div class="tips-grid">
+        <div class="tip">
+          <h3>Mushuklar uchun</h3>
+          <ul>
+            <li>Toza suv har doim bo'lsin</li>
+            <li>Lotokni har kuni tozalang</li>
+            <li>Tirnash uchun maxsus taxta qo'ying</li>
+            <li>Yiliga bir marta veterinarga olib boring</li>
+          </ul>
+        </div>
+        <div class="tip">
+          <h3>Itlar uchun</h3>
+          <ul>
+            <li>Kuniga kamida 2 marta sayr qiling</li>
+            <li>Ovqatni bir vaqtda bering</li>
+            <li>Oddiy buyruqlarni o'rgating</li>
+            <li>Junini muntazam tarang</li>
+          </ul>
+        </div>
+        <div class="tip">
+          <h3>Quyonlar uchun</h3>
+          <ul>
+            <li>Pichan har doim bo'lsin</li>
+            <li>Kattaroq qafas tanlang</li>
+            <li>Har kuni biroz yugurishga qo'ying</li>
+            <li>Simlarni yashirib qo'ying</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section about" id="about">
+    <div class="container about-grid">
+      <div class="about-text">
+        <span class="eyebrow">Biz haqimizda</span>
+        <h2>Har bir hayvon mehrli uyga loyiq</h2>
+        <p>"Do'stim" — egasiz qolgan hayvonlarga yangi oila topishga yordam beradigan ko'ngillilar jamoasi. 2019-yildan beri biz hayvonlarni davolaymiz, emlaymiz va ular uchun eng mos egani topamiz.</p>
+        <p>Asrab olish bepul. Siz faqat mehr va g'amxo'rlik berasiz.</p>
+      </div>
+
+      <div class="about-cards">
+        <div class="about-card">
+          <span class="icon"><svg viewBox="0 0 24 24"><path d="M12 21s-7-4.5-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 11c0 5.5-7 10-7 10Z" /></svg></span>
+          <h3>Mehr va parvarish</h3>
+          <p>Har bir hayvon iliq joyda yashaydi va har kuni parvarish qilinadi.</p>
+        </div>
+        <div class="about-card">
+          <span class="icon"><svg viewBox="0 0 24 24"><path d="M9 3h6v4h4v6h-4v8H9v-8H5V7h4z" /></svg></span>
+          <h3>Veterinar nazorati</h3>
+          <p>Barcha hayvonlar emlangan va shifokor ko'rigidan o'tgan.</p>
+        </div>
+        <div class="about-card">
+          <span class="icon"><svg viewBox="0 0 24 24"><path d="M3 11l9-7 9 7v9a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z" /></svg></span>
+          <h3>Keyin ham yordam</h3>
+          <p>Asrab olgandan keyin ham maslahat berib, yordam qilamiz.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section faq">
+    <div class="container faq-inner">
+      <div class="section-title">
+        <span class="eyebrow">Savol-javob</span>
+        <h2>Ko'p beriladigan savollar</h2>
+      </div>
+
+      <details>
+        <summary>Asrab olish pullikmi?</summary>
+        <p>Yo'q, asrab olish to'liq bepul. Faqat hayvonga yaxshi sharoit yaratishingiz kerak.</p>
+      </details>
+      <details>
+        <summary>Qanday hujjatlar kerak?</summary>
+        <p>Faqat shaxsingizni tasdiqlovchi hujjat (pasport yoki ID karta) kerak bo'ladi.</p>
+      </details>
+      <details>
+        <summary>Hayvon uyimga moslasha olmasa nima bo'ladi?</summary>
+        <p>Birinchi oyda biz siz bilan aloqada bo'lamiz. Muammo bo'lsa, maslahat beramiz yoki hayvonni qaytarib olamiz.</p>
+      </details>
+      <details>
+        <summary>Ko'ngilli bo'lib ishlasam bo'ladimi?</summary>
+        <p>Albatta! Aloqa bo'limidagi telefon raqamiga qo'ng'iroq qiling yoki boshpanaga keling.</p>
+      </details>
+    </div>
+  </section>
+
+  <section class="help">
+    <div class="container help-box">
+      <div>
+        <h2>Asrab ololmaysizmi? Baribir yordam bera olasiz</h2>
+        <p>Ovqat, adyol yoki o'yinchoq olib keling, ko'ngilli bo'ling yoki do'stlaringizga saytimiz haqida aytib bering.</p>
+      </div>
+      <a href="#contact" class="btn btn-light">Bog'lanish</a>
+    </div>
+  </section>
+
+  <section class="section" id="contact">
+    <div class="container">
+      <div class="section-title">
+        <span class="eyebrow">Aloqa</span>
+        <h2>Biz bilan bog'laning</h2>
+        <p>Savollaringiz bo'lsa, qo'ng'iroq qiling yoki boshpanamizga keling.</p>
+      </div>
+
+      <div class="contact-grid">
+        <div class="contact-card">
+          <span class="icon"><svg viewBox="0 0 24 24"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2Z" /></svg></span>
+          <h3>Telefon</h3>
+          <p>+998 90 123 45 67</p>
+        </div>
+        <div class="contact-card">
+          <span class="icon"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2" /><path d="M3 7l9 6 9-6" /></svg></span>
+          <h3>Email</h3>
+          <p>info@dostim.uz</p>
+        </div>
+        <div class="contact-card">
+          <span class="icon"><svg viewBox="0 0 24 24"><path d="M12 21s-7-6-7-11a7 7 0 0 1 14 0c0 5-7 11-7 11Z" /><circle cx="12" cy="10" r="2.5" /></svg></span>
+          <h3>Manzil</h3>
+          <p>Toshkent sh., Yunusobod tumani</p>
+        </div>
+        <div class="contact-card">
+          <span class="icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" /><path d="M12 7v5l3 2" /></svg></span>
+          <h3>Ish vaqti</h3>
+          <p>Har kuni 9:00 – 18:00</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container footer-grid">
+      <div>
+        <a href="#home" class="logo logo-light">Do'stim</a>
+        <p>Egasiz hayvonlarga yangi uy topishga yordam beramiz.</p>
+      </div>
+      <div>
+        <h4>Sahifalar</h4>
+        <a href="#home">Bosh sahifa</a>
+        <a href="#pets">Hayvonlar</a>
+        <a href="#news">Yangiliklar</a>
+        <a href="#about">Biz haqimizda</a>
+      </div>
+      <div>
+        <h4>Aloqa</h4>
+        <p>+998 90 123 45 67</p>
+        <p>info@dostim.uz</p>
+        <p>Toshkent sh.</p>
+      </div>
+    </div>
+    <p class="copy">&copy; 2026 Do'stim. Barcha huquqlar himoyalangan.</p>
+  </footer>
+
+  <div class="modal" id="detailsModal">
+    <div class="modal-box modal-wide">
+      <button class="close-btn" type="button">&times;</button>
+      <div class="modal-grid">
+        <div class="model-box modal-model">
+          <model-viewer
+            id="modalViewer"
+            class="viewer-modal"
+            alt="Hayvonning 3D modeli"
+            auto-rotate
+            camera-controls
+            shadow-intensity="1"
+            interaction-prompt="none">
+            <div class="loading" slot="poster">Yuklanmoqda...</div>
+          </model-viewer>
+          <div class="model-error">Model topilmadi</div>
+        </div>
+        <div>
+          <span class="type-badge static" id="modalType"></span>
+          <h2 id="modalName"></h2>
+          <p class="breed" id="modalInfo"></p>
+          <p class="modal-desc" id="modalDesc"></p>
+          <button class="btn btn-primary btn-full" id="adoptBtn" type="button">Asrab olish</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal" id="adoptModal">
+    <div class="modal-box">
+      <button class="close-btn" type="button">&times;</button>
+
+      <form class="adopt-form" id="adoptForm">
+        <h2>Asrab olish arizasi</h2>
+        <p class="breed">Tanlangan hayvon: <b id="adoptPet"></b></p>
+
+        <label for="fName">Ismingiz</label>
+        <input type="text" id="fName" placeholder="Ism va familiya">
+
+        <label for="fPhone">Telefon</label>
+        <input type="tel" id="fPhone" placeholder="+998 90 123 45 67">
+
+        <label for="fEmail">Email</label>
+        <input type="text" id="fEmail" placeholder="siz@example.com">
+
+        <label for="fNote">Izoh</label>
+        <textarea id="fNote" rows="3" placeholder="O'zingiz haqingizda qisqacha..."></textarea>
+
+        <p class="form-error" id="formError"></p>
+        <button class="btn btn-primary btn-full" type="submit">Arizani yuborish</button>
+      </form>
+
+      <div class="success" id="successBox" hidden>
+        <span class="success-icon">&#10003;</span>
+        <h2>Arizangiz qabul qilindi</h2>
+        <p>Rahmat! Tez orada siz bilan bog'lanamiz.</p>
+        <button class="btn btn-primary close-btn ok-btn" type="button">Yaxshi</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
